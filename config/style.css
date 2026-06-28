@@ -66,7 +66,7 @@ header {
 
     img {
         max-width: 95%;
-        width: 350px;
+        width: 300px;
     }
 
     .noticias {
@@ -139,6 +139,11 @@ header {
                 font-size: 24px;
                 margin: 0 5px;
             }
+        }
+
+        .datos:focus-within {
+            box-shadow: 0 0 0 2px var(--gris);
+            border: 1px solid transparent;
         }
     }
 
@@ -262,9 +267,11 @@ input::-ms-reveal,
 input::-ms-clear {
     display: none;
 }
-#togglePassword{
-    cursor:pointer;
+
+#togglePassword {
+    cursor: pointer;
 }
-#togglePassword:hover{
-    color:var(--gris);
+
+#togglePassword:hover {
+    color: var(--gris);
 }
