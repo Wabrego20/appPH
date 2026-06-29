@@ -2,6 +2,23 @@
 require_once("../../config/verificar_sesion.php");
 require_once("../../config/conexion.php");
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// 1. EDITAR (ANTES DEL HTML)
+$editData = null;
+if (isset($_GET['edit'])) {
+
+    $id = $_GET['edit'];
+
+    $sql = "SELECT * FROM units WHERE unit_id = :id";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+
+    $editData = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 // INSERTAR
 if (isset($_POST['guardar'])) {
 
@@ -19,6 +36,28 @@ if (isset($_POST['guardar'])) {
     $stmt->bindParam(':owner_phone', $owner_phone);
     $stmt->bindParam(':owner_email', $owner_email);
     $stmt->execute();
+
+    header("Location: admin_units.php");
+    exit();
+}
+if (isset($_POST['actualizar'])) {
+
+    $sql = "UPDATE units 
+            SET unit_code = :unit_code,
+                owner_name = :owner_name,
+                owner_phone = :owner_phone,
+                owner_email = :owner_email
+            WHERE unit_id = :id";
+
+    $stmt = $conexion->prepare($sql);
+
+    $stmt->execute([
+        ':unit_code' => $_POST['unit_code'],
+        ':owner_name' => $_POST['owner_name'],
+        ':owner_phone' => $_POST['owner_phone'],
+        ':owner_email' => $_POST['owner_email'],
+        ':id' => $_POST['unit_id']
+    ]);
 
     header("Location: admin_units.php");
     exit();
@@ -86,46 +125,83 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <main>
         <!-- FORMULARIO -->
         <form method="POST" class="unidad">
-            <h3>Registrar dueño de la residencia</h3>
+            <h3>Registrar o Editar dueño de la residencia</h3>
             <div class="entradas">
-                <input type="text" name="unit_code" placeholder="Código (Ej: A-101)" autofocus required>
-                <input type="text" name="owner_name" placeholder="Nombre del propietario" required>
-                <input type="text" name="owner_phone" placeholder="Teléfono">
-                <input type="email" name="owner_email" placeholder="Correo">
+                <input type="hidden" name="unit_id" value="<?= $editData['unit_id'] ?? '' ?>">
+
+                <input type="text" name="unit_code"
+                    placeholder="Código"
+                    value="<?= $editData['unit_code'] ?? '' ?>" required>
+
+                <input type="text" name="owner_name"
+                    placeholder="Nombre"
+                    value="<?= $editData['owner_name'] ?? '' ?>" required>
+
+                <input type="text" name="owner_phone"
+                    placeholder="Teléfono"
+                    value="<?= $editData['owner_phone'] ?? '' ?>">
+
+                <input type="email" name="owner_email"
+                    placeholder="Correo"
+                    value="<?= $editData['owner_email'] ?? '' ?>">
             </div>
-            <button type="submit" name="guardar"><i class="bi bi-floppy"></i>Guardar</button>
+            <?php if ($editData): ?>
+                <button type="submit" name="actualizar"><i class="bi bi-floppy-fill"></i>Actualizar</button>
+            <?php else: ?>
+                <button type="submit" name="guardar"><i class="bi bi-floppy"></i>Guardar</button>
+            <?php endif; ?>
+
         </form>
 
         <hr>
 
         <!-- TABLA -->
-        <table border="1" cellpadding="10">
+        <div class="table-container">
+            <input type="text" id="searchInput" placeholder="Buscar unidad o propietario..." class="search-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Unidad</th>
+                        <th>Propietario</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
 
-            <tr>
-                <th>ID</th>
-                <th>Unidad</th>
-                <th>Propietario</th>
-                <th>Teléfono</th>
-                <th>Email</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
+                <tbody>
+                    <?php foreach ($units as $u): ?>
+                        <tr>
+                            <td><?= $u['unit_id'] ?></td>
+                            <td><?= $u['unit_code'] ?></td>
+                            <td><?= $u['owner_name'] ?></td>
+                            <td><?= $u['owner_phone'] ?></td>
+                            <td><?= $u['owner_email'] ?></td>
 
-            <?php foreach ($units as $u): ?>
-                <tr>
-                    <td><?= $u['unit_id'] ?></td>
-                    <td><?= $u['unit_code'] ?></td>
-                    <td><?= $u['owner_name'] ?></td>
-                    <td><?= $u['owner_phone'] ?></td>
-                    <td><?= $u['owner_email'] ?></td>
-                    <td><?= $u['status'] ?></td>
-                    <td>
-                        <a href="?delete=<?= $u['unit_id'] ?>" onclick="return confirm('¿Eliminar?')"><i class="bi bi-trash"></i></a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+                            <td>
+                                <span class="badge <?= $u['status'] == 'Activo' ? 'badge-activo' : 'badge-inactivo' ?>">
+                                    <?= $u['status'] ?>
+                                </span>
+                            </td>
 
-        </table>
+                            <td>
+                                <a href="?edit=<?= $u['unit_id'] ?>" class="btn-icon btn-edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <a href="?delete=<?= $u['unit_id'] ?>" class="btn-icon btn-delete"
+                                    onclick="return confirm('¿Eliminar?')">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+        </div>
     </main>
 
     <footer>
@@ -137,7 +213,7 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>Se Connecta</p>
         </h6>
     </footer>
-
+    <script src="../../config/script.js"></script>
 </body>
 
 </html>

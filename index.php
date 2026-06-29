@@ -37,6 +37,7 @@
                 <input type="text" placeholder="Ingresa tu usuario" name="user_user" id="user_user" autofocus required>
             </div>
         </div>
+
         <div class="login--caja">
             <label for="user_password">Contraseña</label>
             <div class="datos">
@@ -45,6 +46,7 @@
                 <i class="bi bi-eye" id="togglePassword"></i>
             </div>
         </div>
+
         <div class="login--action">
             <div class="action--check">
                 <div class="action">
@@ -57,6 +59,18 @@
                 <i class="bi bi-box-arrow-in-right"></i>
                 Iniciar Sesión
             </button>
+            <?php
+            if (isset($_GET['error'])) {
+
+                if ($_GET['error'] == 'user') {
+                  echo '<p class="error-msg"><i class="bi bi-exclamation-triangle"></i> Usuario incorrecto</p>';
+                }
+
+                if ($_GET['error'] == 'password') {
+                    echo '<p class="error-msg"><i class="bi bi-exclamation-triangle"></i> Contraseña incorrecta</p>';
+                }
+            }
+            ?>
         </div>
         <footer>
             <span>

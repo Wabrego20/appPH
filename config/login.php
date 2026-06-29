@@ -76,12 +76,12 @@ try {
                     exit("El rol asignado no es válido.");
             }
         } else {
-
-            echo "Contraseña incorrecta.";
+            header("Location: ../index.php?error=password");
+            exit();
         }
     } else {
-
-        echo "El usuario no existe.";
+        header("Location: ../index.php?error=user");
+            exit();
     }
 } catch (PDOException $e) {
 
