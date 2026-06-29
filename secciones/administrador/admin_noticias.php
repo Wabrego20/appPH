@@ -36,15 +36,10 @@ require_once("../../config/verificar_sesion.php");
         </div>
     </header>
     <div class="ruta">
-        <b>Inicio</b>
+        <a href="dashboard.php">Inicio</a>
+        <p>/</p>
+        <b>Comunicados y Noticias</b>
     </div>
-
-    <a href="admin_noticias.php" class="card" title="click para ingresar">
-        <h4>Comunicados y Noticias</h4>
-        <i class="bi bi-megaphone"></i>
-        <h5>Crear, editar y administrar avisos para residentes.</h5>
-        <i class="bi bi-box-arrow-in-right"></i>
-    </a>
 
 </body>
 
