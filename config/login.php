@@ -1,36 +1,79 @@
 <?php
 session_start();
-require_once("conexion.php"); // Ajusta la ruta si es necesario
+require_once("conexion.php");
 
-$user = $_POST["user_user"];
+// Verificar que llegaron los datos por POST
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    exit("Acceso no permitido.");
+}
+
+$user = trim($_POST["user_user"]);
 $password = $_POST["user_password"];
 
-$sql = "SELECT * FROM users WHERE user_user = :user";
+try {
 
-$stmt = $conexion->prepare($sql);
-$stmt->bindParam(":user", $user);
-$stmt->execute();
+    $sql = "SELECT * FROM users WHERE user_user = :user LIMIT 1";
 
-$datos = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $conexion->prepare($sql);
+    $stmt->bindParam(":user", $user, PDO::PARAM_STR);
+    $stmt->execute();
 
-if ($datos) {
+    $datos = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (password_verify($password, $datos["user_password"])) {
+    // Verificar si existe el usuario
+    if ($datos) {
 
-        $_SESSION["user_user"] = $datos["user_user"];
+        // Verificar si el usuario está activo
+        if ($datos["user_state"] != "Activo") {
+            exit("El usuario está inactivo.");
+        }
 
-        header("Location: ../secciones/administrador/dashboard.php");
-        exit();
+        // Verificar la contraseña
+        if (password_verify($password, $datos["user_password"])) {
 
+            // Guardar datos de la sesión
+            $_SESSION["user_id"] = $datos["user_id"];
+            $_SESSION["user_name"] = $datos["user_name"];
+            $_SESSION["user_user"] = $datos["user_user"];
+            $_SESSION["role_id"] = $datos["role_id"];
+
+            // Actualizar último acceso
+            $sqlUpdate = "UPDATE users
+                          SET user_last_access = NOW()
+                          WHERE user_id = :id";
+
+            $stmtUpdate = $conexion->prepare($sqlUpdate);
+            $stmtUpdate->bindParam(":id", $datos["user_id"], PDO::PARAM_INT);
+            $stmtUpdate->execute();
+
+            // Redireccionar según el rol
+            switch ($datos["role_id"]) {
+
+                case 1:
+                    header("Location: ../secciones/administrador/dashboard.php");
+                    exit();
+
+                case 2:
+                    header("Location: ../secciones/residente/dashboard.php");
+                    exit();
+
+                case 3:
+                    header("Location: ../secciones/guardia/dashboard.php");
+                    exit();
+
+                default:
+                    session_destroy();
+                    exit("El rol asignado no es válido.");
+            }
+        } else {
+
+            echo "Contraseña incorrecta.";
+        }
     } else {
 
-        echo "Contraseña incorrecta";
-
+        echo "El usuario no existe.";
     }
+} catch (PDOException $e) {
 
-} else {
-
-    echo "Usuario no existe";
-
+    echo "Error: " . $e->getMessage();
 }
-?>
