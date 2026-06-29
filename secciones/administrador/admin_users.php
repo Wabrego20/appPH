@@ -36,31 +36,11 @@ require_once("../../config/verificar_sesion.php");
         </div>
     </header>
     <div class="ruta">
-        <b>Inicio</b>
+        <a href="dashboard.php">Inicio</a>
+        <p>/</p>
+        <b>Gestión de Usuarios</b>
     </div>
-
-    <main>
-        <a href="admin_notices.php" class="card" title="click para ingresar">
-            <h4>Comunicados y Noticias</h4>
-            <i class="bi bi-megaphone"></i>
-            <h5>Crear, editar y administrar avisos para residentes.</h5>
-            <i class="bi bi-box-arrow-in-right"></i>
-        </a>
-
-        <a href="admin_users.php" class="card" title="click para ingresar">
-            <h4>Usuarios</h4>
-            <i class="bi bi-people"></i>
-            <h5>Crear, editar y administrar usuarios.</h5>
-            <i class="bi bi-box-arrow-in-right"></i>
-        </a>
-
-        <a href="admin_units.php" class="card" title="click para ingresar">
-            <h4>Residencias</h4>
-            <i class="bi bi-houses"></i>
-            <h5>Crear, editar y administrar residencias.</h5>
-            <i class="bi bi-box-arrow-in-right"></i>
-        </a>
-    </main>
+    <main></main>
 
     <footer>
         <span>

@@ -10,6 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 $user = trim($_POST["user_user"]);
 $password = $_POST["user_password"];
 
+// Validación de formato de usuario
+if (!preg_match('/^[a-zA-Z0-9_]{4,20}$/', $user)) {
+    exit("Usuario inválido. Solo letras, números y _ (4 a 20 caracteres).");
+}
+
+// VALIDACIÓN DE LONGITUD
+if (strlen($password) < 8) {
+    exit("La contraseña debe tener al menos 8 caracteres");
+}
+
 try {
 
     $sql = "SELECT * FROM users WHERE user_user = :user LIMIT 1";

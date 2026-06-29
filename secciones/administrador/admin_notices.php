@@ -35,11 +35,22 @@ require_once("../../config/verificar_sesion.php");
             </a>
         </div>
     </header>
+
     <div class="ruta">
         <a href="dashboard.php">Inicio</a>
         <p>/</p>
-        <b>Comunicados y Noticias</b>
+        <b>Gestión de Comunicados y Noticias</b>
     </div>
+    <main></main>
+    <footer>
+        <span>
+            <i class="bi bi-shield-check"></i>
+            <h5>Por su seguridad, cierre sesión al finalizar y no comparta sus credenciales.</h5>
+        </span>
+        <h6>&copy; 2026 William Abrego en cooperación con la administración de Rivera del Oeste -
+            <p>Se Connecta</p>
+        </h6>
+    </footer>
 
 </body>
 

@@ -25,12 +25,47 @@
     --rosa: pink;
     --marron: brown;
 }
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
 header {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0 5px var(--azul_oscuro);
+    box-shadow: 0 0 5px var(--negro);
+}
+.ruta{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--plata);
+    padding: 7px;
+    a{
+        color: var(--negro);
+        text-decoration: none;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+    p{
+        font-weight: bold;
+        margin: 0 5px;
+    }
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    flex: 1;
 }
 
 .logoNombre,
@@ -120,7 +155,7 @@ header {
     flex-direction: column;
     width: 200px;
     height: 200px;
-    box-shadow: inset 0 0 5px var(--negro);
+    box-shadow: inset 0 0 5px var(--azul_oscuro);
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
@@ -128,11 +163,11 @@ header {
     margin: 15px;
     max-width: 95%;
     color: var(--negro);
-    background-color: var(--plata);
+    background-color: var(--azul_claro);
     h4{
         margin: 10px 0;
     }
-    .bi-megaphone{
+    .bi-megaphone, .bi-people, .bi-houses{
         font-size: 40px;
     }
     h5{
@@ -150,21 +185,44 @@ header {
 }
 
 
-.ruta{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid var(--plata);
-    padding: 7px;
-    a{
-        color: var(--negro);
-        text-decoration: none;
+
+
+
+
+
+ footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        box-shadow: 0 0 5px var(--negro);
+
+        span {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin: 5px;
+
+            i {
+                color: var(--verde);
+                font-size: 20px;
+                margin: 0 5px;
+            }
+        }
+
+        h6 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 5px;
+
+            p {
+                color: var(--verde);
+            }
+        }
     }
-    a:hover{
-        text-decoration: underline;
-    }
-    p{
-        font-weight: bold;
-        margin: 0 5px;
-    }
-}
+
+

@@ -34,14 +34,14 @@
             <label for="user_user">Usuario</label>
             <div class="datos">
                 <i class="bi bi-person"></i>
-                <input type="text" placeholder="Ingresa tu usuario" name="user_user" id="user_user" autofocus>
+                <input type="text" placeholder="Ingresa tu usuario" name="user_user" id="user_user" autofocus required>
             </div>
         </div>
         <div class="login--caja">
             <label for="user_password">Contraseña</label>
             <div class="datos">
                 <i class="bi bi-lock"></i>
-                <input type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" name="user_password" id="user_password">
+                <input type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" name="user_password" id="user_password" minlength="8" pattern=".{8,}" title="Mínimo 8 caracteres" required>
                 <i class="bi bi-eye" id="togglePassword"></i>
             </div>
         </div>
@@ -63,12 +63,12 @@
                 <i class="bi bi-shield-check"></i>
                 <h5>Por su seguridad, cierre sesión al finalizar y no comparta sus credenciales.</h5>
             </span>
-            <h6>&copy; 2026 William Abrego en cooperación con la administración de Rivera del Oeste - 
+            <h6>&copy; 2026 William Abrego en cooperación con la administración de Rivera del Oeste -
                 <p>Se Connecta</p>
             </h6>
         </footer>
     </form>
-<script src="config/script.js"></script>
+    <script src="config/script.js"></script>
 </body>
 
 </html>
