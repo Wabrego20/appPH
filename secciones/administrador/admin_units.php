@@ -144,13 +144,13 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="email" name="owner_email"
                     placeholder="Correo"
                     value="<?= $editData['owner_email'] ?? '' ?>">
-            </div>
-            <?php if ($editData): ?>
-                <button type="submit" name="actualizar"><i class="bi bi-floppy-fill"></i>Actualizar</button>
-            <?php else: ?>
-                <button type="submit" name="guardar"><i class="bi bi-floppy"></i>Guardar</button>
-            <?php endif; ?>
 
+                <?php if ($editData): ?>
+                    <button type="submit" name="actualizar"><i class="bi bi-floppy-fill"></i>Actualizar</button>
+                <?php else: ?>
+                    <button type="submit" name="guardar"><i class="bi bi-floppy"></i>Guardar</button>
+                <?php endif; ?>
+            </div>
         </form>
 
         <hr>
