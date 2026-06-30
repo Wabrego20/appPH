@@ -60,15 +60,15 @@ try {
             switch ($datos["role_id"]) {
 
                 case 1:
-                    header("Location: ../secciones/administrador/dashboard.php");
+                    header("Location: ../1-administrador/dashboard.php");
                     exit();
 
                 case 2:
-                    header("Location: ../secciones/residente/dashboard.php");
+                    header("Location: ../2-residente/dashboard.php");
                     exit();
 
                 case 3:
-                    header("Location: ../secciones/guardia/dashboard.php");
+                    header("Location: ../3-guardia/dashboard.php");
                     exit();
 
                 default:
