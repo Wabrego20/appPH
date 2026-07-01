@@ -29,3 +29,4 @@ header("Pragma: no-cache");
 // Ir al login
 header("Location: ../index.php");
 exit();
+?>

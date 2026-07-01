@@ -1,5 +1,5 @@
 <?php
-require_once("../config/verificar_sesion.php");
+require_once("../config/auth.php");
 require_once("../config/conexion.php");
 
 error_reporting(E_ALL);
@@ -89,8 +89,9 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assets/css/config.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <title>Inicio</title>
 </head>
 
@@ -184,7 +185,7 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </main>
 
     <?php include("../includes/footer.php"); ?>
-    <script src="../../config/script.js"></script>
+    <script src="../assets/js/admin.js"></script>
 </body>
 
 </html>

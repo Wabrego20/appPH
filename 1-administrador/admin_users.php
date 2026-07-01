@@ -1,5 +1,5 @@
 <?php
-require_once("../config/verificar_sesion.php");
+require_once("../config/auth.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,8 +7,9 @@ require_once("../config/verificar_sesion.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assets/css/config.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <title>Inicio</title>
 </head>
 
