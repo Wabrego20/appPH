@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
         toggle.addEventListener("click", () => {
             if (password.type === "password") {
                 password.type = "text";
-                toggle.classList.remove("bi-eye");
-                toggle.classList.add("bi-eye-slash");
+                toggle.classList.remove("fi-rr-eye");
+                toggle.classList.add("fi-rr-eye-crossed");
             } else {
                 password.type = "password";
-                toggle.classList.remove("bi-eye-slash");
-                toggle.classList.add("bi-eye");
+                toggle.classList.remove("fi-rr-eye-crossed");
+                toggle.classList.add("fi-rr-eye");
             }
         });
     }

@@ -46,6 +46,7 @@ try {
             $_SESSION["user_name"] = $datos["user_name"];
             $_SESSION["user_user"] = $datos["user_user"];
             $_SESSION["role_id"] = $datos["role_id"];
+            $_SESSION["user_photo"] = $datos["user_photo"];
 
             // Actualizar último acceso
             $sqlUpdate = "UPDATE users

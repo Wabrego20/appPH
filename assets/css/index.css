@@ -109,12 +109,12 @@ main {
                 border-radius: 10px;
             }
 
-            .bi-eye, .bi-eye-slash, .bi {
+            .fi {
                 font-size: 24px;
                 margin: 0 5px;
                 cursor: pointer;
             }
-            .bi-eye:hover, .bi-eye-slash:hover{
+            .fi:hover{
                 color: var(--gris);
             }
         }
@@ -162,20 +162,24 @@ main {
             align-items: center;
             justify-content: center;
             border: none;
-            border-radius: 10px;
+            border-radius: 7px;
             background-color: var(--verde);
             font-size: 20px;
             color: var(--blanco);
             cursor: pointer;
             transition: 0.3s;
+            box-shadow: 2px 2px 5px var(--negro);
 
-            i {
-                margin-right: 10px;
+            h6{
+                margin: 0 10px;
+                font-size: 20px;
+            }
+            h6:hover{
+                text-decoration: underline;
             }
         }
 
         button:hover {
-            text-decoration: underline;
             scale: 0.99;
         }
     }
@@ -202,16 +206,25 @@ main {
 
 .error-msg {
     color: var(--blanco);
-    padding: 5px 7px;
     text-align: center;
     font-weight: bold;
     position: absolute;
-    background-color: var(--rojo_oscuro);
-    top: 5px;
-    right: 1px;
-    padding: 10px 7px;
+    background-color: var(--rojo);
+    top: 2px;
+    right: 2px;
+    width: auto;
+    height: 40px;
     border-radius: 5px;
     animation: bounceIn 0.6s ease-out, fadeOut 6s ease forwards;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    i{
+        margin: 0 5px;
+        line-height: 40px;
+        height: 35px;
+    }
 }
 
 @keyframes bounceIn {
