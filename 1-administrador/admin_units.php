@@ -91,7 +91,7 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/config.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
-    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <title>Inicio</title>
 </head>
 
@@ -137,50 +137,66 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- TABLA -->
         <div class="table-container">
-            <input type="text" id="searchInput" placeholder="Buscar unidad o propietario..." class="search-box">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Unidad</th>
-                        <th>Propietario</th>
-                        <th>Teléfono</th>
-                        <th>Email</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <?php foreach ($units as $u): ?>
+            <div class="table-scroll">
+                <table>
+                    <thead>
                         <tr>
-                            <td><?= $u['unit_id'] ?></td>
-                            <td><?= $u['unit_code'] ?></td>
-                            <td><?= $u['owner_name'] ?></td>
-                            <td><?= $u['owner_phone'] ?></td>
-                            <td><?= $u['owner_email'] ?></td>
-
-                            <td>
-                                <span class="badge <?= $u['status'] == 'Activo' ? 'badge-activo' : 'badge-inactivo' ?>">
-                                    <?= $u['status'] ?>
-                                </span>
-                            </td>
-
-                            <td>
-                                <a href="?edit=<?= $u['unit_id'] ?>" class="btn-icon btn-edit">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-
-                                <a href="?delete=<?= $u['unit_id'] ?>" class="btn-icon btn-delete"
-                                    onclick="return confirm('¿Eliminar?')">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </td>
+                            <th>N°</th>
+                            <th class="sortable">Unidad <span>↕</span></th>
+                            <th class="sortable">Propietario <span>↕</span></th>
+                            <th class="sortable">Teléfono <span>↕</span></th>
+                            <th class="sortable">Email <span>↕</span></th>
+                            <th class="sortable">Estado <span>↕</span></th>
+                            <th>Acciones</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
 
+                    <tbody>
+                        <?php foreach ($units as $u): ?>
+                            <tr>
+                                <td><?= $u['unit_id'] ?></td>
+                                <td><?= $u['unit_code'] ?></td>
+                                <td><?= $u['owner_name'] ?></td>
+                                <td><?= $u['owner_phone'] ?></td>
+                                <td><?= $u['owner_email'] ?></td>
+
+                                <td>
+                                    <span class="badge <?= $u['status'] == 'Activo' ? 'badge-activo' : 'badge-inactivo' ?>">
+                                        <?= $u['status'] ?>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <a href="?edit=<?= $u['unit_id'] ?>" class="btn-icon btn-edit">
+                                        <i class="fi fi-rr-pencil"></i>
+                                    </a>
+
+                                    <a href="?delete=<?= $u['unit_id'] ?>" class="btn-icon btn-delete"
+                                        onclick="return confirm('¿Eliminar?')">
+                                        <i class="fi fi-rr-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="table-controls">
+                <input type="text" id="searchInput" placeholder="Buscar unidad o propietario..." class="search-box">
+                <div id="pagination" class="pagination"></div>
+                <div class="rows-control">
+                    Mostrar
+                    <select id="rowsPerPage">
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                    registros
+                </div>
+
+            </div>
         </div>
     </main>
 
