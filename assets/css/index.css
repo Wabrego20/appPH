@@ -177,6 +177,9 @@ main {
             h6:hover{
                 text-decoration: underline;
             }
+            i {
+                line-height: calc(50%);
+            }
         }
 
         button:hover {
