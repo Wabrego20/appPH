@@ -33,7 +33,7 @@ main {
         flex-wrap: wrap;
 
         input {
-            padding: 7px;
+            padding: 9px 7px;
             border-radius: 5px;
             border: 1px solid var(--gris);
             margin: 5px;
@@ -44,22 +44,31 @@ main {
 
     button {
         background-color: var(--morado);
-        padding: 9px 7px;
         border-radius: 5px;
         border: none;
         cursor: pointer;
         color: var(--blanco);
         transition: 0.3s;
         margin: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 9px 7px;
+        box-shadow: 1px 1px 3px var(--negro);
 
-        i {
-            margin: 5px;
+        i,h5 {
+            margin: 0 5px;
+            line-height: calc(50%);
         }
     }
 
     button:hover {
-        box-shadow: inset 0 0 7px var(--violeta);
+        scale: 0.99;
+        h5{
+            text-decoration: underline;
+        }
     }
+   
 
     hr {
         width: 100%;
@@ -190,6 +199,7 @@ table td {
 .pagination button.active {
     background: var(--azul_oscuro);
     color: var(--blanco);
+    cursor: default;
 }
 
 /* BOTONES */
@@ -209,8 +219,6 @@ table td {
 .btn-edit {
     color: var(--naranja);
 }
-
-
 
 .btn-delete {
     color: var(--rojo);

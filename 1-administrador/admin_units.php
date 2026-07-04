@@ -7,9 +7,9 @@ ini_set('display_errors', 1);
 
 // 1. EDITAR (ANTES DEL HTML)
 $editData = null;
-if (isset($_GET['edit'])) {
+if (isset($_GET['editar'])) {
 
-    $id = $_GET['edit'];
+    $id = $_GET['editar'];
 
     $sql = "SELECT * FROM units WHERE unit_id = :id";
     $stmt = $conexion->prepare($sql);
@@ -23,18 +23,18 @@ if (isset($_GET['edit'])) {
 if (isset($_POST['guardar'])) {
 
     $unit_code = $_POST['unit_code'];
-    $owner_name = $_POST['owner_name'];
-    $owner_phone = $_POST['owner_phone'];
-    $owner_email = $_POST['owner_email'];
+    $unit_name = $_POST['unit_name'];
+    $unit_phone = $_POST['unit_phone'];
+    $unit_email = $_POST['unit_email'];
 
-    $sql = "INSERT INTO units (unit_code, owner_name, owner_phone, owner_email)
-            VALUES (:unit_code, :owner_name, :owner_phone, :owner_email)";
+    $sql = "INSERT INTO units (unit_code, unit_name, unit_phone, unit_email)
+            VALUES (:unit_code, :unit_name, :unit_phone, :unit_email)";
 
     $stmt = $conexion->prepare($sql);
     $stmt->bindParam(':unit_code', $unit_code);
-    $stmt->bindParam(':owner_name', $owner_name);
-    $stmt->bindParam(':owner_phone', $owner_phone);
-    $stmt->bindParam(':owner_email', $owner_email);
+    $stmt->bindParam(':unit_name', $unit_name);
+    $stmt->bindParam(':unit_phone', $unit_phone);
+    $stmt->bindParam(':unit_email', $unit_email);
     $stmt->execute();
 
     header("Location: admin_units.php");
@@ -44,18 +44,18 @@ if (isset($_POST['actualizar'])) {
 
     $sql = "UPDATE units 
             SET unit_code = :unit_code,
-                owner_name = :owner_name,
-                owner_phone = :owner_phone,
-                owner_email = :owner_email
+                unit_name = :unit_name,
+                unit_phone = :unit_phone,
+                unit_email = :unit_email
             WHERE unit_id = :id";
 
     $stmt = $conexion->prepare($sql);
 
     $stmt->execute([
         ':unit_code' => $_POST['unit_code'],
-        ':owner_name' => $_POST['owner_name'],
-        ':owner_phone' => $_POST['owner_phone'],
-        ':owner_email' => $_POST['owner_email'],
+        ':unit_name' => $_POST['unit_name'],
+        ':unit_phone' => $_POST['unit_phone'],
+        ':unit_email' => $_POST['unit_email'],
         ':id' => $_POST['unit_id']
     ]);
 
@@ -64,9 +64,9 @@ if (isset($_POST['actualizar'])) {
 }
 
 // ELIMINAR
-if (isset($_GET['delete'])) {
+if (isset($_GET['eliminar'])) {
 
-    $id = $_GET['delete'];
+    $id = $_GET['eliminar'];
 
     $sql = "DELETE FROM units WHERE unit_id = :id";
     $stmt = $conexion->prepare($sql);
@@ -113,22 +113,27 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     placeholder="Código"
                     value="<?= $editData['unit_code'] ?? '' ?>" required>
 
-                <input type="text" name="owner_name"
+                <input type="text" name="unit_name"
                     placeholder="Nombre"
-                    value="<?= $editData['owner_name'] ?? '' ?>" required>
+                    value="<?= $editData['unit_name'] ?? '' ?>" required>
 
-                <input type="text" name="owner_phone"
+                <input type="text" name="unit_phone"
                     placeholder="Teléfono"
-                    value="<?= $editData['owner_phone'] ?? '' ?>">
+                    title="Formato válido: 809-1234 o 1234-5678"
+                    maxlength="9"
+                    pattern="^\d{3,4}-\d{4}$"
+                    value="<?= $editData['unit_phone'] ?? '' ?>" required>
 
-                <input type="email" name="owner_email"
+                <input type="text" name="unit_email"
                     placeholder="Correo"
-                    value="<?= $editData['owner_email'] ?? '' ?>">
+                    pattern="^[^@]+@.{3,}\.com$"
+                    title="Ingrese un correo válido (ej: usuario@dominio.com)"
+                    value="<?= $editData['unit_email'] ?? '' ?>" required>
 
                 <?php if ($editData): ?>
-                    <button type="submit" name="actualizar"><i class="bi bi-floppy-fill"></i>Actualizar</button>
+                    <button type="submit" name="actualizar"><i class="fi fi-rr-floppy-disk-circle-arrow-right"></i><h5>Actualizar</h5></button>
                 <?php else: ?>
-                    <button type="submit" name="guardar"><i class="bi bi-floppy"></i>Guardar</button>
+                    <button type="submit" name="guardar"><i class="fi fi-rr-disk"></i><h5>Guardar</h5></button>
                 <?php endif; ?>
             </div>
         </form>
@@ -156,22 +161,22 @@ $units = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <td><?= $u['unit_id'] ?></td>
                                 <td><?= $u['unit_code'] ?></td>
-                                <td><?= $u['owner_name'] ?></td>
-                                <td><?= $u['owner_phone'] ?></td>
-                                <td><?= $u['owner_email'] ?></td>
+                                <td><?= $u['unit_name'] ?></td>
+                                <td><?= $u['unit_phone'] ?></td>
+                                <td><?= $u['unit_email'] ?></td>
 
                                 <td>
-                                    <span class="badge <?= $u['status'] == 'Activo' ? 'badge-activo' : 'badge-inactivo' ?>">
-                                        <?= $u['status'] ?>
+                                    <span class="badge <?= $u['unit_status'] == 'Activo' ? 'badge-activo' : 'badge-inactivo' ?>">
+                                        <?= $u['unit_status'] ?>
                                     </span>
                                 </td>
 
                                 <td>
-                                    <a href="?edit=<?= $u['unit_id'] ?>" class="btn-icon btn-edit">
+                                    <a href="?editar=<?= $u['unit_id'] ?>" class="btn-icon btn-edit">
                                         <i class="fi fi-rr-pencil"></i>
                                     </a>
 
-                                    <a href="?delete=<?= $u['unit_id'] ?>" class="btn-icon btn-delete"
+                                    <a href="?eliminar=<?= $u['unit_id'] ?>" class="btn-icon btn-delete"
                                         onclick="return confirm('¿Eliminar?')">
                                         <i class="fi fi-rr-trash"></i>
                                     </a>
