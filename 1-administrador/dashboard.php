@@ -39,7 +39,7 @@ require_once("../config/auth.php");
         </a>
 
         <a href="admin_notices.php" class="card" title="click para ingresar">
-            <h4>Vistas</h4>
+            <h4>Visitas</h4>
             <i class="fi fi-rr-family"></i>
             <h5>Gestionar y visualizar visitas diarias.</h5>
         </a>

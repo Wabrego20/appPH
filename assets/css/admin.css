@@ -5,74 +5,76 @@ main {
     width: 100%;
     flex-wrap: wrap;
     flex: 1;
+}
 
-    .unidad {
-        width: 100%;
-        border-radius: 7px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
+.unidad {
+    width: 100%;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
 
-        h3 {
-            margin: 10px;
-            width: 95%;
-            text-align: center;
-            background-color: var(--azul_oscuro);
-            color: var(--blanco);
-            padding: 12px;
-        }
+.unidad h3 {
+    margin: 10px;
+    width: 95%;
+    text-align: center;
+    background-color: var(--azul_oscuro);
+    color: var(--blanco);
+    padding: 12px;
+}
+
+.entradas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    flex-wrap: wrap;
+}
+
+.entradas input {
+    padding: 9px 7px;
+    border-radius: 5px;
+    border: 1px solid var(--gris);
+    margin: 5px;
+    width: 250px;
+    max-width: 100%;
+}
+
+button {
+    background-color: var(--morado);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: var(--blanco);
+    transition: 0.3s;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 7px;
+    box-shadow: 1px 1px 3px var(--negro);
+}
+
+button i,
+button h5 {
+    margin: 0 5px;
+    line-height: calc(50%);
+}
+
+button:hover {
+    scale: 0.99;
+
+    h5 {
+        text-decoration: underline;
     }
+}
 
-    .entradas {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 95%;
-        flex-wrap: wrap;
 
-        input {
-            padding: 9px 7px;
-            border-radius: 5px;
-            border: 1px solid var(--gris);
-            margin: 5px;
-            width: 250px;
-            max-width: 100%;
-        }
-    }
-
-    button {
-        background-color: var(--morado);
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        color: var(--blanco);
-        transition: 0.3s;
-        margin: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 9px 7px;
-        box-shadow: 1px 1px 3px var(--negro);
-
-        i,h5 {
-            margin: 0 5px;
-            line-height: calc(50%);
-        }
-    }
-
-    button:hover {
-        scale: 0.99;
-        h5{
-            text-decoration: underline;
-        }
-    }
-   
-
-    hr {
-        width: 100%;
-    }
+hr {
+    width: 100%;
 }
 
 
@@ -92,26 +94,26 @@ main {
     max-width: 95%;
     color: var(--blanco);
     background-color: var(--azul_oscuro);
-    box-shadow: 2px 2px 5px var(--negro);
+    box-shadow: 0 0 5px var(--negro);
+}
 
-    h4 {
-        padding: 5px 0;
-        margin: 5px 0;
-        width: 95%;
-        text-align: center;
-        border-bottom: 1px solid var(--plata);
-    }
+.card h4 {
+    padding: 5px 0;
+    margin: 5px 0;
+    width: 95%;
+    text-align: center;
+    border-bottom: 1px solid var(--plata);
+}
 
-    .fi {
-        font-size: 40px;
-    }
+.card .fi {
+    font-size: 50px;
+}
 
-    h5 {
-        text-align: center;
-        width: 95%;
-        border-top: 1px solid var(--plata);
-        padding: 5px 3px;
-    }
+.card h5 {
+    text-align: center;
+    width: 95%;
+    border-top: 1px solid var(--plata);
+    padding: 5px 3px;
 }
 
 .card:hover {
@@ -121,7 +123,8 @@ main {
 /*dashboard.php-----fin*/
 
 
-/*admin_units.php*/.table-container {
+/*admin_units.php*/
+.table-container {
     width: 95%;
     overflow-x: auto;
     overflow-y: hidden;
@@ -175,6 +178,7 @@ table td {
     border: 2px solid var(--gris);
     border-radius: 5px;
 }
+
 .search-box:focus {
     outline: none;
     border-color: var(--azul_oscuro);
@@ -234,8 +238,13 @@ table td {
     font-weight: bold;
 }
 
-.badge-activo { color: var(--verde); }
-.badge-inactivo { color: var(--rojo); }
+.badge-activo {
+    color: var(--verde);
+}
+
+.badge-inactivo {
+    color: var(--rojo);
+}
 
 
 
@@ -251,3 +260,15 @@ table td {
 }
 
 /*admin_units.php------fin*/
+
+@media (max-width:1094px) {
+    .entradas input {
+        min-width: 48%;
+    }
+}
+
+@media (max-width:555px) {
+    .entradas input {
+        min-width: 100%;
+    }
+}
